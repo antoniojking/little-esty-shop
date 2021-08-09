@@ -150,7 +150,7 @@ RSpec.describe 'the merchant dashboard' do
     # And each bulk discount listed includes a link to its show page
     it 'has a link to view all discounts associated with the merchant' do
       visit merchant_path(@merchant1.id)
-
+      
       expect(page).to have_link("My Bulk Discounts")
     end
 
