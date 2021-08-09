@@ -135,7 +135,6 @@ RSpec.describe 'the merchant dashboard' do
         expect(page).to have_content("3. #{customer6.first_name} #{customer6.last_name} - #{@merchant1.top_customers.third.total_count}")
         expect(page).to have_content("4. #{customer7.first_name} #{customer7.last_name} - #{@merchant1.top_customers.fourth.total_count}")
         expect(page).to have_content("5. #{@customer1.first_name} #{@customer1.last_name} - #{@merchant1.top_customers.last.total_count}")
-
       end
     end
   end
