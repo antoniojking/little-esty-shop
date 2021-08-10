@@ -5,7 +5,7 @@ RSpec.describe 'Merchant Bulk Discounts Show Page' do
   # When I visit my bulk discount show page
   # Then I see the bulk discount's quantity threshold and percentage discount
   it 'displays the attributes of the bulk discount associated with the merchant' do
-    visit merchant_bulk_discount_path(@merchant1.id, @bulk_discount.id)
+    visit merchant_bulk_discount_path(@merchant1.id, @bulk_discount1.id)
 
     expect(page).to have_content(@bulk_discount1.id)
     expect(page).to have_content(@bulk_discount1.percentage_discount)
