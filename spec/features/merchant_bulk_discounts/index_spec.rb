@@ -74,4 +74,56 @@ RSpec.describe 'Merchant Bulk Discounts Index Page' do
       end
     end
   end
+
+  # As a merchant
+  # When I visit my bulk discounts index
+  # Then I see a link to create a new discount
+  # When I click this link
+  # Then I am taken to a new page where I see a form to add a new bulk discount
+  # When I fill in the form with valid data
+  # Then I am redirected back to the bulk discount index
+  # And I see my new bulk discount listed
+  it 'has a link to create a new discount' do
+    visit merchant_bulk_discounts_path(@merchant1.id)
+
+    expect(page).to have_link("Create a New Discount")
+  end
+
+  it 'takes me to a form to create a new discount' do
+    visit merchant_bulk_discounts_path(@merchant1.id)
+
+    click_link("Create a New Discount")
+
+    expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant1.id))
+  end
+
+  # As a merchant
+  # When I visit my bulk discounts index
+  # Then next to each bulk discount I see a link to delete it
+  # When I click this link
+  # Then I am redirected back to the bulk discounts index page
+  # And I no longer see the discount listed
+  it 'has a link to delete a bulk discount and can delete the discount' do
+    visit merchant_bulk_discounts_path(@merchant1.id)
+
+    within("#bd-#{@bulk_discount1.id}") do
+      expect(page).to have_link("Delete this Discount")
+    end
+
+    within("#bd-#{@bulk_discount2.id}") do
+      expect(page).to have_link("Delete this Discount")
+    end
+
+    within("#bd-#{@bulk_discount3.id}") do
+      expect(page).to have_link("Delete this Discount")
+    end
+
+    within("#bd-#{@bulk_discount1.id}") do
+      click_link("Delete this Discount")
+    end
+
+    expect(page).to_not have_link("#{@bulk_discount1.id}")
+    expect(page).to_not have_content(@bulk_discount1.percentage_discount)
+    expect(page).to_not have_content(@bulk_discount1.quantity_threshold)
+  end
 end

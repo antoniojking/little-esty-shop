@@ -7,6 +7,10 @@
   <p><%= api_holidays.third.name %>, <%= api_holidays.third.date %></p>
 </div>
 
+<br>
+<%= link_to "Create a New Discount", new_merchant_bulk_discount_path(@merchant.id) %>
+<br>
+
 <h2>List of Bulk Discounts:</h2>
 
 <% @merchant.bulk_discounts.each do |bulk_discount| %>
@@ -14,5 +18,6 @@
     <p><b>Bulk Discount ID:</b> <%=link_to bulk_discount.id, merchant_bulk_discount_path(@merchant.id, bulk_discount.id) %></p>
     <p><%= bulk_discount.percentage_discount %>% Discount</p>
     <p>Purchase of <%= bulk_discount.quantity_threshold %> or more</p>
+    <p><%=link_to "Delete this Discount", merchant_bulk_discount_path(@merchant.id, bulk_discount.id), method: :delete %></p>
   </div>
 <% end %>
