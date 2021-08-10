@@ -1,5 +1,12 @@
 <h1><%= @merchant.name %>'s Bulk Discounts Index Page</h1>
 
+<h2>Upcoming Holidays</h2>
+<div id="Upcoming Holidays">
+  <p><%= api_holidays.first.localname %>, <%= api_holidays.first.date %></p>
+  <p><%= api_holidays.second.localname %>, <%= api_holidays.second.date %></p>
+  <p><%= api_holidays.third.localname %>, <%= api_holidays.third.date %></p>
+</div>
+
 <h2>List of Bulk Discounts:</h2>
 
 <% @merchant.bulk_discounts.each do |bulk_discount| %>

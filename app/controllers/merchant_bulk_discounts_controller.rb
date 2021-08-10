@@ -4,6 +4,15 @@ class MerchantBulkDiscountsController < ApplicationController
   end
 
   def show
-    
+
+  end
+
+  private
+  
+  def api_holidays
+    json = SwaggerService.new.upcoming_holidays
+    json.map do |holiday|
+      Holiday.new(holiday)
+    end
   end
 end
