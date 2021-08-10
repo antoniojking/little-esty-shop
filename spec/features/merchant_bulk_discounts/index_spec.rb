@@ -12,18 +12,18 @@ RSpec.describe 'Merchant Bulk Discounts Index Page' do
   it 'displays list of bulk discounts associated with the merchant along with attributes' do
     visit merchant_bulk_discounts_path(@merchant1.id)
 
-    within("bd-#{@bulk_discount1.id}") do
-      expect(page).to have_content(@bulk_discount1.percent_discount)
+    within("#bd-#{@bulk_discount1.id}") do
+      expect(page).to have_content(@bulk_discount1.percentage_discount)
       expect(page).to have_content(@bulk_discount1.quantity_threshold)
     end
 
-    within("bd-#{@bulk_discount2.id}") do
-      expect(page).to have_content(@bulk_discount2.percent_discount)
+    within("#bd-#{@bulk_discount2.id}") do
+      expect(page).to have_content(@bulk_discount2.percentage_discount)
       expect(page).to have_content(@bulk_discount2.quantity_threshold)
     end
 
-    within("bd-#{@bulk_discount3.id}") do
-      expect(page).to have_content(@bulk_discount3.percent_discount)
+    within("#bd-#{@bulk_discount3.id}") do
+      expect(page).to have_content(@bulk_discount3.percentage_discount)
       expect(page).to have_content(@bulk_discount3.quantity_threshold)
     end
   end
@@ -31,24 +31,24 @@ RSpec.describe 'Merchant Bulk Discounts Index Page' do
   it 'has links to each bulk discounts show page' do
     visit merchant_bulk_discounts_path(@merchant1.id)
 
-    within("bd-#{@bulk_discount1.id}") do
-      expect(page).to have_link(@bulk_discount1.id)
+    within("#bd-#{@bulk_discount1.id}") do
+      expect(page).to have_link("#{@bulk_discount1.id}")
     end
 
-    within("bd-#{@bulk_discount2.id}") do
-      expect(page).to have_link(@bulk_discount2.id)
+    within("#bd-#{@bulk_discount2.id}") do
+      expect(page).to have_link("#{@bulk_discount2.id}")
     end
 
-    within("bd-#{@bulk_discount3.id}") do
-      expect(page).to have_link(@bulk_discount3.id)
+    within("#bd-#{@bulk_discount3.id}") do
+      expect(page).to have_link("#{@bulk_discount3.id}")
     end
   end
 
   it 'will redirect to the bulk discount show page upon clicking the link' do
     visit merchant_bulk_discounts_path(@merchant1.id)
 
-    click_link(@bulk_discount1.id)
+    click_link("#{@bulk_discount1.id}")
 
-    expect(current_path).to eq(merchant_bulk_discount_path(@bulk_discount1.id))
+    expect(current_path).to eq(merchant_bulk_discount_path(@merchant1.id, @bulk_discount1.id))
   end
 end
