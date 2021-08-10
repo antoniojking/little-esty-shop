@@ -135,8 +135,31 @@ RSpec.describe 'the merchant dashboard' do
         expect(page).to have_content("3. #{customer6.first_name} #{customer6.last_name} - #{@merchant1.top_customers.third.total_count}")
         expect(page).to have_content("4. #{customer7.first_name} #{customer7.last_name} - #{@merchant1.top_customers.fourth.total_count}")
         expect(page).to have_content("5. #{@customer1.first_name} #{@customer1.last_name} - #{@merchant1.top_customers.last.total_count}")
-
       end
+    end
+  end
+
+  describe 'bulk discounts' do
+    # As a merchant
+    # When I visit my merchant dashboard
+    # Then I see a link to view all my discounts
+    # When I click this link
+    # Then I am taken to my bulk discounts index page
+    # Where I see all of my bulk discounts including their
+    # percentage discount and quantity thresholds
+    # And each bulk discount listed includes a link to its show page
+    it 'has a link to view all discounts associated with the merchant' do
+      visit merchant_path(@merchant1.id)
+      
+      expect(page).to have_link("My Bulk Discounts")
+    end
+
+    it 'has a link that redirects me to the merchant bulk discounts index page' do
+      visit merchant_path(@merchant1.id)
+
+      click_link("My Bulk Discounts")
+
+      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1.id))
     end
   end
 end

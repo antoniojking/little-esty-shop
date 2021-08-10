@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :items
+  has_many :bulk_discounts
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
@@ -32,7 +33,7 @@ class Merchant < ApplicationRecord
     .order(revenue: :desc)
     .limit(5)
   end
-  
+
   def merchant_best_day
     invoices.joins(:transactions)
             .select("invoices.created_at, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
