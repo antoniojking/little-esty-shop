@@ -46,3 +46,10 @@ class MerchantBulkDiscountsController < ApplicationController
     params.permit(:percentage_discount, :quantity_threshold)
   end
 end
+
+private
+
+def api_holidays
+  json = SwaggerService.new.upcoming_holidays
+  json.map do |holiday|
+    Holiday.new(holiday)

@@ -1,6 +1,15 @@
 <h1><%= @merchant.name %>'s Bulk Discounts Index Page</h1>
 
+<h2>Upcoming Holidays</h2>
+<div id="Holidays">
+  <p><%= api_holidays.first.name %>, <%= api_holidays.first.date %></p>
+  <p><%= api_holidays.second.name %>, <%= api_holidays.second.date %></p>
+  <p><%= api_holidays.third.name %>, <%= api_holidays.third.date %></p>
+</div>
+
+<br>
 <%= link_to "Create a New Discount", new_merchant_bulk_discount_path(@merchant.id) %>
+<br>
 
 <h2>List of Bulk Discounts:</h2>
 
