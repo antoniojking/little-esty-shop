@@ -120,17 +120,17 @@ RSpec.describe 'the merchant invoice show' do
 
       within("#item-#{@item1.id}") do
         expect(page).to have_content("Discount Applied: #{@bulk_discount4.id}")
-        expect(page).to have_link(@bulk_discount4.id)
+        expect(page).to have_link("#{@bulk_discount4.id}")
       end
 
       within("#item-#{@item2.id}") do
         expect(page).to have_content("Discount Applied: #{@bulk_discount2.id}")
-        expect(page).to have_link(@bulk_discount2.id)
+        expect(page).to have_link("#{@bulk_discount2.id}")
       end
 
       within("#item-#{@item3.id}") do
         expect(page).to have_content("Discount Applied: #{@bulk_discount5.id}")
-        expect(page).to have_link(@bulk_discount5.id)
+        expect(page).to have_link("#{@bulk_discount5.id}")
       end
 
       within("#item-#{@item5.id}") do
@@ -139,12 +139,12 @@ RSpec.describe 'the merchant invoice show' do
 
       within("#item-#{@item17.id}") do
         expect(page).to have_content("Discount Applied: #{@bulk_discount1.id}")
-        expect(page).to have_link(@bulk_discount1.id)
+        expect(page).to have_link("#{@bulk_discount1.id}")
 
-        click_link(@bulk_discount1.id)
+        click_link("#{@bulk_discount1.id}")
       end
 
-      expect(current_path).to eq(merchant_bulk_discount_path(@merchant1.id, @bulkdiscount1.id))
+      expect(current_path).to eq(merchant_bulk_discount_path(@merchant1.id, @bulk_discount1.id))
     end
   end
 end
