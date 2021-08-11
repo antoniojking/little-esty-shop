@@ -19,6 +19,10 @@ class InvoiceItem < ApplicationRecord
   end
 
   def discounted_revenue
-    quantity * unit_price * ( 1 - find_item_discount.percentage_discount / 100.00)
+    if find_item_discount.nil?
+      quantity * unit_price
+    else
+      quantity * unit_price * ( 1 - find_item_discount.percentage_discount / 100.00 )
+    end
   end
 end
