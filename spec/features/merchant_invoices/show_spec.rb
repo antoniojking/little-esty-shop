@@ -108,5 +108,36 @@ RSpec.describe 'the merchant invoice show' do
         expect(page).to have_content("Total Discounted Revenue: $825.63")
       end
     end
+
+    it 'has links to the applied discount show next to each invoice item' do
+      invoice_item22 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item5.id, quantity: 1, unit_price: @item5.unit_price, status: 'shipped')
+      invoice_item23 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item17.id, quantity: 10, unit_price: @item17.unit_price, status: 'shipped')
+
+      visit merchant_invoice_path(@merchant1.id, @invoice1.id)
+
+      within("#item-#{@item1.id}") do
+        expect(page).to have_content("Discount Applied: #{@bulk_discount4.id}")
+        expect(page).to have_link(@bulk_discount4.id)
+      end
+
+      within("#item-#{@item15.id}") do
+        expect(page).to have_content("Discount Applied: #{@bulk_discount2.id}")
+        expect(page).to have_link(@bulk_discount2.id)
+      end
+
+      within("#item-#{@item16.id}") do
+        expect(page).to have_content("Discount Applied: #{@bulk_discount5.id}")
+        expect(page).to have_link(@bulk_discount5.id)
+      end
+
+      within("#item-#{@item5.id}") do
+        expect(page).to have_content("Does Not Qualify for Discount")
+      end
+
+      within("#item-#{@item17.id}") do
+        expect(page).to have_content("Discount Applied: #{@bulk_discount1.id}")
+        expect(page).to have_link(@bulk_discount1.id)
+      end
+    end
   end
 end
