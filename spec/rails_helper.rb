@@ -57,6 +57,8 @@ RSpec.configure do |config|
     @bulk_discount3 = @merchant1.bulk_discounts.create!(percentage_discount: 15, quantity_threshold: 15)
     @bulk_discount4 = @merchant1.bulk_discounts.create!(percentage_discount: 40, quantity_threshold: 100)
     @bulk_discount5 = @merchant1.bulk_discounts.create!(percentage_discount: 35, quantity_threshold: 50)
+    @bulk_discount6 = @merchant3.bulk_discounts.create!(percentage_discount: 15, quantity_threshold: 5)
+    @bulk_discount7 = @merchant2.bulk_discounts.create!(percentage_discount: 20, quantity_threshold: 10)
 
     #Customers
     @customer1 = Customer.create!(first_name: 'Gunner', last_name: 'Runkle')
