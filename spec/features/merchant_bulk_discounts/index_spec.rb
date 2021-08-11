@@ -63,7 +63,7 @@ RSpec.describe 'Merchant Bulk Discounts Index Page' do
       visit merchant_bulk_discounts_path(@merchant1.id)
 
       expect(page).to have_content("Upcoming Holidays")
-      save_and_open_page
+
       within("#Holidays") do
         expect(page).to have_content("Labour Day")
         expect(page).to have_content("2021-09-06")
@@ -123,7 +123,7 @@ RSpec.describe 'Merchant Bulk Discounts Index Page' do
     end
 
     expect(page).to_not have_link("#{@bulk_discount1.id}")
-    expect(page).to_not have_content(@bulk_discount1.percentage_discount)
-    expect(page).to_not have_content(@bulk_discount1.quantity_threshold)
+    expect(page).to_not have_content("#{@bulk_discount1.percentage_discount}% Discount")
+    expect(page).to_not have_content("Purchase of #{@bulk_discount1.quantity_threshold} or more")
   end
 end
