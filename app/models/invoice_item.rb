@@ -18,8 +18,7 @@ class InvoiceItem < ApplicationRecord
                                 .first
   end
 
-  def self.discounted_revenue
-    require "pry"; binding.pry
-    quantity * unit_price
+  def discounted_revenue
+    quantity * unit_price * ( 1 - find_item_discount.percentage_discount / 100.00)
   end
 end
