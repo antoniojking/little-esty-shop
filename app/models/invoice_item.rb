@@ -12,11 +12,9 @@ class InvoiceItem < ApplicationRecord
     sum("quantity * unit_price")
   end
 
-  def item_discount
+  def find_item_discount
     item.merchant.bulk_discounts.where('quantity_threshold <= ?', quantity)
                                 .order(percentage_discount: :desc)
                                 .first
-                                .select('sum(quantity * unit_price * (1 - percentage_discount / 100))')
-    require "pry"; binding.pry
   end
 end

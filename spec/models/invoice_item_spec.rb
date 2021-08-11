@@ -39,8 +39,8 @@ RSpec.describe InvoiceItem, type: :model do
   end
 
   describe 'discounts' do
-    it 'calculates discounted revenue of a single invoice item' do
-      expect(@invoice_item1.item_discount).to eq(30000)
+    it 'determines discount for an invoive item' do
+      expect(@invoice_item1.find_item_discount).to eq(@bulk_discount4)
     end
   end
 
