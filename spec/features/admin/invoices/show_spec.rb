@@ -65,8 +65,8 @@ RSpec.describe 'Admin Invoice Show Page' do
     invoice_item3 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item3.id, quantity: 25, unit_price: @item3.unit_price, status: 'shipped')
 
     visit admin_invoice_path("#{@invoice1.id}")
-
-    expect(page).to have_content("Total Revenue: $#{@invoice1.total_revenue/100}")
+  
+    expect(page).to have_content("Total Revenue: $1,175.00")
     # expect(page).to have_content("Total Revenue: #{@invoice1.total_revenue.number_to_currency(price, unit: "$")}")
   end
 
@@ -110,7 +110,7 @@ RSpec.describe 'Admin Invoice Show Page' do
     invoice_item26 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item6.id, quantity: 15, unit_price: @item6.unit_price, status: 'shipped')
 
     visit admin_invoice_path(@invoice1.id)
-    save_and_open_page
+
     expect(page).to have_content("Total Revenue: $1,444.00")
     expect(page).to have_content("Total Discounted Revenue: $1,071.87")
   end
