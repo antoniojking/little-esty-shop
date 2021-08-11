@@ -65,8 +65,8 @@ RSpec.describe 'Admin Invoice Show Page' do
     invoice_item3 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item3.id, quantity: 25, unit_price: @item3.unit_price, status: 'shipped')
 
     visit admin_invoice_path("#{@invoice1.id}")
-
-    expect(page).to have_content("Total Revenue: $#{@invoice1.total_revenue/100}")
+  
+    expect(page).to have_content("Total Revenue: $1,175.00")
     # expect(page).to have_content("Total Revenue: #{@invoice1.total_revenue.number_to_currency(price, unit: "$")}")
   end
 
@@ -96,5 +96,22 @@ RSpec.describe 'Admin Invoice Show Page' do
 
     expect(updated_invoice.status).to eq('in_progress')
     expect(page).to have_select(:status, selected: 'in_progress')
+  end
+
+  # As an admin
+  # When I visit an admin invoice show page
+  # Then I see the total revenue from this invoice (not including discounts)
+  # And I see the total discounted revenue from this invoice which includes bulk discounts in the calculation
+  it 'shows total discounted revenue' do
+    invoice_item22 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item5.id, quantity: 1, unit_price: @item5.unit_price, status: 'shipped')
+    invoice_item23 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item17.id, quantity: 10, unit_price: @item17.unit_price, status: 'shipped')
+    invoice_item24 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item7.id, quantity: 5, unit_price: @item7.unit_price, status: 'shipped')
+    invoice_item25 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item8.id, quantity: 1, unit_price: @item8.unit_price, status: 'shipped')
+    invoice_item26 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item6.id, quantity: 15, unit_price: @item6.unit_price, status: 'shipped')
+
+    visit admin_invoice_path(@invoice1.id)
+
+    expect(page).to have_content("Total Revenue: $1,444.00")
+    expect(page).to have_content("Total Discounted Revenue: $1,071.87")
   end
 end
