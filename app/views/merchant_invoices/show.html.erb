@@ -23,6 +23,13 @@
       <p><b>Item Name:</b> <%= item.name %></p>
       <p><b>Quantity:</b> <%= invoice_item.quantity %></p>
       <p><b>Unit Price:</b> <%= invoice_item.unit_price %></p>
+
+      <% if invoice_item.find_item_discount.nil? %>
+        <p><b>Does Not Qualify for Discount</b></p>
+      <% else %>
+        <p><b>Discount Applied:</b> <%= link_to invoice_item.find_item_discount.id, merchant_bulk_discount_path(@merchant.id, invoice_item.find_item_discount.id) %></p>
+      <% end %>
+
       <%= form_with model: invoice_item do |f| %>
         <%= f.select :status, ['pending', 'packaged', 'shipped'], selected: invoice_item.status %>
         <%= f.submit "Update Item Status" %>
