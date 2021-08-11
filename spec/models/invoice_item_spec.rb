@@ -49,6 +49,13 @@ RSpec.describe InvoiceItem, type: :model do
       expect(invoice_item23.find_item_discount).to eq(@bulk_discount1)
       expect(invoice_item22.find_item_discount).to eq(nil)
     end
+
+    it 'calculates discounted revenue for a collection of invoice items' do
+      invoice_item22 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item5.id, quantity: 1, unit_price: @item5.unit_price, status: 'shipped')
+      invoice_item23 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item17.id, quantity: 10, unit_price: @item17.unit_price, status: 'shipped')
+      
+      expect(@invoice1.invoice_items.discounted_revenue).to eq(82562.5)
+    end
   end
 
   # describe 'instance methods' do
