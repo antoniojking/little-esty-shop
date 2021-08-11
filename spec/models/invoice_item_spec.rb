@@ -38,6 +38,12 @@ RSpec.describe InvoiceItem, type: :model do
     end
   end
 
+  describe 'discounts' do
+    it 'calculates discounted revenue of a single invoice item' do
+      expect(@invoice_item1.item_discount).to eq(30000)
+    end
+  end
+
   # describe 'instance methods' do
   #   describe '#' do
   #   end
