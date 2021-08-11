@@ -17,4 +17,9 @@ class InvoiceItem < ApplicationRecord
                                 .order(percentage_discount: :desc)
                                 .first
   end
+
+  def self.discounted_revenue
+    require "pry"; binding.pry
+    quantity * unit_price
+  end
 end
