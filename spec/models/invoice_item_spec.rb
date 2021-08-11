@@ -50,11 +50,15 @@ RSpec.describe InvoiceItem, type: :model do
       expect(invoice_item22.find_item_discount).to eq(nil)
     end
 
-    it 'calculates discounted revenue for a collection of invoice items' do
+    it 'calculates discounted revenue for an invoice item' do
       invoice_item22 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item5.id, quantity: 1, unit_price: @item5.unit_price, status: 'shipped')
       invoice_item23 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item17.id, quantity: 10, unit_price: @item17.unit_price, status: 'shipped')
 
       expect(@invoice_item1.discounted_revenue).to eq(30000)
+      expect(@invoice_item15.discounted_revenue).to eq(12250)
+      expect(@invoice_item16.discounted_revenue).to eq(7312.5)
+      expect(invoice_item23.discounted_revenue).to eq(25000)
+      expect(invoice_item22.discounted_revenue).to eq(8000)
     end
   end
 

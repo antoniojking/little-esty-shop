@@ -19,9 +19,9 @@ class Invoice < ApplicationRecord
     .order(:created_at)
   end
 
-  def discounted_revenue
-    invoice_items.joins(item: { merchant: :bulk_discounts })
-                 .where('bulk_discounts.quantity_threshold <= ?', invoice_items.quantity).order(:percentage_discount).last
-                 .select('invoices_items.*, bulk_discounts.*, sum(quantity * unit_price * (1 - percentage_discount / 100))')
+  def total_discounted_revenue
+    invoice_items.map do |invoice_item|
+      invoice_item.discounted_revenue
+    end.sum
   end
 end
