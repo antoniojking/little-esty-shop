@@ -16,13 +16,8 @@ RSpec.describe Invoice do
   end
 
   it 'calculates invoice total revenue' do
-    invoice_item22 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item5.id, quantity: 1, unit_price: @item5.unit_price, status: 'shipped')
-    invoice_item23 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item17.id, quantity: 10, unit_price: @item17.unit_price, status: 'shipped')
-
-    # expect(@invoice1.invoice_items.count).to eq(3)
-    # expect(@invoice1.total_revenue).to eq(78750)
-    expect(@invoice1.invoice_items.count).to eq(5)
-    expect(@invoice1.total_revenue).to eq(25000)
+    expect(@invoice1.invoice_items.count).to eq(3)
+    expect(@invoice1.total_revenue).to eq(78750)
   end
 
   it 'returns list of invoices from old to new with invoice_items that have not been shipped' do

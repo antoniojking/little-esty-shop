@@ -18,8 +18,7 @@ RSpec.describe 'the merchant invoice show' do
       within('#invoice_info') do
         expect(page).to have_content("Status: #{@invoice1.status}")
         expect(page).to have_content("Created on: #{@invoice1.created_at.strftime("%A, %B %d, %Y")}")
-        # expect(page).to have_content("Total Revenue: $787.00")
-        expect(page).to have_content("Total Revenue: $250.00")
+        expect(page).to have_content("Total Revenue: $787.00")
       end
     end
 
@@ -106,7 +105,6 @@ RSpec.describe 'the merchant invoice show' do
       visit merchant_invoice_path(@merchant1.id, @invoice1.id)
 
       within('#invoice_info') do
-        expect(page).to have_content("Total Revenue: $250.00")
         expect(page).to have_content("Discounted Revenue: $575.62")
       end
     end
