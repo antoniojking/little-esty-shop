@@ -1,0 +1,17 @@
+language: ruby
+rbenv:
+- 2.7.2
+addons:
+- postgresql: 9.6
+script:
+- bundle exec rails db:{create,migrate) RAILS_ENV=test
+- bundle exec rspec
+deploy:
+  provider: heroku
+  api_key:
+    secure: G5HBtMu4NYD2WqMX/rOxp2Qd+w+mWjjriJ9bu/TvNe2ysEj9rYkzVsMjSJ5y5NII0O8sN2qcjQpBXdsCmju2oPO6ZcT8WNpB3CdIFYON7MLyZ1Y+D/1L6xYer1ZPnEwZVZ0ZcaSR79PBSIV7aIavNmCzJ4Pcpwixc2deHO59r/kCnslP8b3wbsBZC+bzHvjNt2LtQixrrV6+3vzJ0c623e/wxTEfPab+S35KPs3fJs47oZioISHJhhzLjUhZcr6zFIxcYAmXPz9ZWXkwG2cL6IB3z6xNFC2Yv2ESrOxmd1lYBgTulReRExCAcI1mHIU9Ta73IUq1D1bAIUWOZl6H7xTv2akiv8eBFgco66lsUS5Cmd8t7wJgixd2px6JojEB39qdQ3DtNsAMiudsStG4TYJsxUfcPxxv8Ar4XTqQbkziahT4nuQqyWkFy0wO6tok5BB2cnaZ8TTgLmhHIvaLAYkkoQDj2mmWPcxnSfksBtvta+C8hEkURAUZwcV5JwBgsQoFxOpx2IzNZx5ou0zAhiXcJqM8PwvPdCoTRbHFO7lF3IWdWzhD9eDz1Wzu14MhNOEj/OhSQRUnPjmYmniiqWGdr5X0QTegk1ftMrcezn4Wpl2uIFAciSSs7y70AYljP2ZZRjKhWAkND27KZGdPa2K1jbvWigXfJ30+eBIMNPE=
+  app: damp-oasis-24181
+  run: rails db:migrate
+  on:
+    repo: antoniojking/little-esty-shop
+    branch: main
